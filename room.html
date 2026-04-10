@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光影對決｜房間頁</title>
+  <link rel="stylesheet" href="css/room.css">
+</head>
+<body>
+  <main class="room-page">
+    <section class="side-panel player-panel" aria-labelledby="my-panel-title">
+      <div class="panel-header">
+        <span class="header-line"></span>
+        <h2 id="my-panel-title">我方資訊</h2>
+      </div>
+
+      <div class="identity-pill-row">
+        <span id="my-camp-mark-pill" class="identity-pill">我的陣營：-- / --</span>
+      </div>
+
+      <div class="character-heading">
+        <h3 id="my-character-name">尚未同步角色</h3>
+        <p id="my-character-role" class="character-role">請先完成第二頁選角，再進入房間頁。</p>
+      </div>
+
+      <div class="portrait-shell">
+        <img id="my-character-image" src="assets/characters/knight.png" alt="我方角色圖">
+      </div>
+
+      <article class="skill-card">
+        <p class="skill-card-label">被動技能</p>
+        <h4 id="my-passive-name">等待同步</h4>
+        <p id="my-passive-detail">等待同步角色後顯示。</p>
+      </article>
+
+      <article class="skill-card">
+        <p class="skill-card-label">主動技能</p>
+        <h4 id="my-active-name">等待同步</h4>
+        <p id="my-active-detail">等待同步角色後顯示。</p>
+      </article>
+    </section>
+
+    <section class="center-panel" aria-labelledby="room-center-title">
+      <div class="brand-block">
+        <p class="brand-eyebrow">LIGHT × SHADOW CYBER ARENA</p>
+        <h1 id="room-center-title">光影對決</h1>
+        <p class="brand-copy">先選陣營，再選角色，完成建房與準備後進入戰鬥。</p>
+      </div>
+
+      <div class="center-grid">
+        <section class="control-card">
+          <div class="panel-header small">
+            <span class="header-line"></span>
+            <h2>房間操作</h2>
+          </div>
+
+          <p id="current-player-name" class="control-player-name">玩家名稱：--</p>
+
+          <div class="button-row two-up">
+            <button id="create-room-btn" class="action-button primary" type="button">建立新房間</button>
+            <button id="copy-room-btn" class="action-button secondary" type="button">複製房號</button>
+          </div>
+
+          <div class="join-row">
+            <input id="join-room-input" class="room-input" type="text" maxlength="6" placeholder="輸入房號加入房間">
+            <button id="join-room-btn" class="join-button" type="button">加入房間</button>
+          </div>
+
+          <section class="rules-card" aria-labelledby="shared-rules-title">
+            <h3 id="shared-rules-title">共通戰鬥規則</h3>
+            <ul>
+              <li>棋盤採 3x3，房主固定為 O，房客固定為 X。</li>
+              <li>每回合必須先落 1 子；若已有 3 顆，會先移除最舊棋再落新棋。</li>
+              <li>成功連線可獲得 SP，中央格參與連線時會拿到額外加成。</li>
+              <li>光 / 暗陣營只影響戰鬥效果，不決定 O / X 身分。</li>
+            </ul>
+          </section>
+        </section>
+
+        <section class="status-card">
+          <div class="panel-header small">
+            <span class="header-line"></span>
+            <h2>目前狀態</h2>
+          </div>
+
+          <div class="room-code-block">
+            <p class="room-code-label">房號</p>
+            <p id="room-code" class="room-code">-- ----</p>
+            <p id="room-role-summary" class="room-role-summary">你的身分：尚未建立或加入房間</p>
+          </div>
+
+          <div class="status-player-grid">
+            <article class="status-player-card">
+              <p class="status-card-title">玩家一</p>
+              <p id="slot-o-name" class="status-name">等待中</p>
+              <p id="slot-o-meta" class="status-meta">-- / --</p>
+              <p id="slot-o-ready" class="status-ready idle">未加入</p>
+            </article>
+
+            <article class="status-player-card">
+              <p class="status-card-title">玩家二</p>
+              <p id="slot-x-name" class="status-name">等待中</p>
+              <p id="slot-x-meta" class="status-meta">-- / --</p>
+              <p id="slot-x-ready" class="status-ready idle">未加入</p>
+            </article>
+          </div>
+
+          <div class="button-row two-up status-actions">
+            <button id="toggle-ready-btn" class="action-button primary" type="button">準備</button>
+            <button id="leave-room-btn" class="action-button secondary" type="button">離開房間</button>
+          </div>
+
+          <button id="start-battle-btn" class="start-button" type="button" disabled>房主開始</button>
+          <p id="status-message" class="status-message">請先建立房間或輸入房號加入房間。</p>
+        </section>
+      </div>
+    </section>
+
+    <section class="side-panel enemy-panel" aria-labelledby="enemy-panel-title">
+      <div class="panel-header">
+        <span class="header-line"></span>
+        <h2 id="enemy-panel-title">敵方資訊</h2>
+      </div>
+
+      <div class="identity-pill-row">
+        <span id="enemy-camp-pill" class="identity-pill enemy">對手陣營：未顯示</span>
+      </div>
+
+      <div class="character-heading">
+        <h3 id="enemy-character-name">尚未同步角色</h3>
+        <p id="enemy-character-role" class="character-role">對手尚未加入或尚未完成選角。</p>
+      </div>
+
+      <div class="portrait-shell placeholder">
+        <div class="portrait-placeholder-copy">對手尚未選角<br>或尚未加入房間</div>
+      </div>
+
+      <article class="skill-card enemy-skill-card">
+        <p class="skill-card-label">被動技能</p>
+        <h4 id="enemy-passive-name">等待對手同步</h4>
+        <p id="enemy-passive-detail">等待對手角色後顯示。</p>
+      </article>
+
+      <article class="skill-card enemy-skill-card">
+        <p class="skill-card-label">主動技能</p>
+        <h4 id="enemy-active-name">等待對手同步</h4>
+        <p id="enemy-active-detail">等待對手角色後顯示。</p>
+      </article>
+    </section>
+  </main>
+
+  <div id="room-toast" class="room-toast" role="status" aria-live="polite"></div>
+
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-rtdb.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/character-data.js"></script>
+  <script src="js/room.js"></script>
+</body>
+</html>

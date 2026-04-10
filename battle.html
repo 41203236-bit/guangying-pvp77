@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光影對決｜戰鬥頁模板</title>
+  <link rel="stylesheet" href="css/battle.css">
+</head>
+<body>
+  <div class="battle-bg-glow battle-bg-glow-left" aria-hidden="true"></div>
+  <div class="battle-bg-glow battle-bg-glow-right" aria-hidden="true"></div>
+
+  <main class="battle-page">
+    <div class="corner-chip room-chip">
+      <span>房號：</span>
+      <strong id="battle-room-code">--</strong>
+    </div>
+
+    <div class="corner-chip turn-chip" id="turn-indicator">現在輪到你操作</div>
+
+    <section class="battle-top-center" aria-label="戰鬥上方資訊">
+      <div class="round-pill">
+        <div class="round-col">
+          <span class="round-label">第</span>
+          <strong id="battle-round-number">1</strong>
+          <span class="round-label">回合</span>
+        </div>
+        <div class="round-divider"></div>
+        <div class="round-col time">
+          <strong id="battle-timer-value">20</strong>
+          <span class="round-label">秒</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="battle-stage">
+      <aside id="my-fighter-side" class="fighter-side fighter-side-left fighter-side-left-reworked" aria-labelledby="my-battle-panel-title">
+        <div class="hp-column hp-column-left hp-column-large">
+          <p class="hp-percent" id="my-hp-percent">100%</p>
+          <div class="hp-bar-shell hp-bar-shell-left"><img id="my-hp-bar-image" src="assets/ui/hp_bar_O.png" alt="我方血量條" class="hp-bar-image hp-bar-image-large"><div id="my-hp-bar-loss" class="hp-bar-loss" aria-hidden="true"></div></div>
+        </div>
+
+        <div class="fighter-card fighter-card-left-large">
+          <div class="fighter-card-header fighter-card-header-left">
+            <span class="fighter-badge" id="my-identity-badge">你・光 / O</span>
+          </div>
+
+          <div class="fighter-card-main fighter-card-main-left">
+            <div class="portrait-panel-left">
+              <div class="portrait-frame portrait-frame-left-large">
+                <img id="my-battle-portrait" src="assets/characters/knight.png" alt="我方角色">
+              </div>
+            </div>
+
+            <div class="resource-columns resource-columns-left">
+              <div class="resource-column resource-column-ult">
+                <p class="resource-column-label">ULT</p>
+                <div class="resource-column-body ult-stars ult-stars-vertical" id="my-ult-stars" aria-label="我方 ULT 星星"></div>
+                <p class="resource-value" id="my-ult-value">ULT 0 / 100</p>
+              </div>
+              <div class="resource-column resource-column-sp">
+                <p class="resource-column-label">SP</p>
+                <div class="resource-column-body star-column-vertical" id="my-sp-stars" aria-label="我方 SP 星星"></div>
+                <p class="resource-value" id="my-sp-value">SP 0 / 100</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="fighter-meta fighter-meta-left">
+            <h2 id="my-battle-name">騎士・Knight</h2>
+            <p id="my-battle-role">穩定推進 / 保持盤面壓力</p>
+          </div>
+
+          <div class="info-strip info-strip-left">
+            <p class="info-title">說明區</p>
+            <p id="my-camp-effect" class="info-copy">直排連線 +8HP</p>
+          </div>
+        </div>
+      </aside>
+
+      <section class="board-stage" aria-label="戰鬥棋盤區">
+        <div class="board-shell" id="board-shell">
+          <div class="board-turn-overlay" id="board-turn-overlay" aria-hidden="true">對方操作中</div>
+          <div class="board-grid" id="battle-grid">
+            
+            <button type="button" class="grid-cell" data-cell-index="0"></button>
+            <button type="button" class="grid-cell" data-cell-index="1"></button>
+            <button type="button" class="grid-cell" data-cell-index="2"></button>
+            <button type="button" class="grid-cell" data-cell-index="3"></button>
+            <button type="button" class="grid-cell" data-cell-index="4"></button>
+            <button type="button" class="grid-cell" data-cell-index="5"></button>
+            <button type="button" class="grid-cell" data-cell-index="6"></button>
+            <button type="button" class="grid-cell" data-cell-index="7"></button>
+            <button type="button" class="grid-cell" data-cell-index="8"></button>
+          </div>
+        </div>
+      </section>
+
+      <aside id="enemy-fighter-side" class="fighter-side fighter-side-right fighter-side-right-reworked" aria-labelledby="enemy-battle-panel-title">
+        <div class="fighter-card fighter-card-right-large enemy">
+          <div class="fighter-card-header fighter-card-header-right">
+            <span class="fighter-badge enemy" id="enemy-identity-badge">對手・暗 / X</span>
+          </div>
+
+          <div class="fighter-card-main fighter-card-main-right">
+            <div class="resource-columns resource-columns-right">
+              <div class="resource-column resource-column-ult enemy-resource-column">
+                <p class="resource-column-label">ULT</p>
+                <div class="resource-column-body ult-stars ult-stars-vertical" id="enemy-ult-stars" aria-label="敵方 ULT 星星"></div>
+                <p class="resource-value" id="enemy-ult-value">ULT 0 / 100</p>
+              </div>
+              <div class="resource-column resource-column-sp enemy-resource-column">
+                <p class="resource-column-label">SP</p>
+                <div class="resource-column-body star-column-vertical" id="enemy-sp-stars" aria-label="敵方 SP 星星"></div>
+                <p class="resource-value" id="enemy-sp-value">SP 0 / 100</p>
+              </div>
+            </div>
+
+            <div class="portrait-panel-right">
+              <div class="portrait-frame portrait-frame-right-large enemy">
+                <img id="enemy-battle-portrait" src="assets/characters/assassin.png" alt="敵方角色">
+              </div>
+            </div>
+          </div>
+
+          <div class="fighter-meta fighter-meta-right">
+            <h2 id="enemy-battle-name">刺客・Assassin</h2>
+            <p id="enemy-battle-role">擾亂節奏 / 打斷布局</p>
+          </div>
+
+          <div class="info-strip info-strip-right">
+            <p class="info-title">說明區</p>
+            <p id="enemy-camp-effect" class="info-copy">直排連線獲得 1 層增傷</p>
+          </div>
+        </div>
+
+        <div class="hp-column hp-column-right hp-column-mirror">
+          <p class="hp-percent" id="enemy-hp-percent">100%</p>
+          <div class="hp-bar-shell hp-bar-shell-right"><img id="enemy-hp-bar-image" src="assets/ui/hp_bar_X.png" alt="敵方血量條" class="hp-bar-image hp-bar-image-mirror"><div id="enemy-hp-bar-loss" class="hp-bar-loss" aria-hidden="true"></div></div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="battle-bottom">
+      <div class="action-bar">
+        <div class="action-header">
+          <h3>戰技命令</h3>
+          <div class="skill-usage-dots" id="skill-usage-dots" aria-label="本回合可用技能次數"></div>
+        </div>
+
+        <div class="skill-button-row">
+          <button type="button" class="skill-button image-skill-button" data-skill="atk">
+            <img src="assets/ui/skill_atk.png" alt="攻擊">
+            <span class="skill-ult-gain">ULT 25</span>
+          </button>
+
+          <button type="button" class="skill-button image-skill-button" data-skill="def">
+            <img src="assets/ui/skill_def.png" alt="防禦">
+            <span class="skill-ult-gain">ULT 20</span>
+          </button>
+
+          <button type="button" class="skill-button image-skill-button" data-skill="hel">
+            <img src="assets/ui/skill_hel.png" alt="回血">
+            <span class="skill-ult-gain">ULT 20</span>
+          </button>
+
+          <button type="button" class="skill-button image-skill-button active-skill" data-skill="active">
+            <img src="assets/ui/skill_stn.png" alt="主動技">
+            <span class="skill-ult-gain">ULT 35</span>
+          </button>
+
+          <button type="button" class="skill-button ultimate-button" data-skill="ult">
+            <span class="skill-name">大招</span>
+          </button>
+        </div>
+      </div>
+
+      <button type="button" class="end-turn-button" id="battle-end-turn-button">結束回合</button>
+    </section>
+  </main>
+
+  <div class="result-overlay" id="result-overlay" aria-hidden="true">
+    <div class="result-card">
+      <h2 class="result-title" id="result-title">勝利</h2>
+      <p class="result-quote" id="result-quote">凡夫終究是凡夫。</p>
+      <p class="result-subtitle" id="result-subtitle">本局已結束</p>
+      <p class="result-countdown" id="result-countdown">10 秒後返回房間</p>
+      <div class="result-actions">
+        <button type="button" class="result-action-button secondary" id="result-room-button">重新回菜單</button>
+        <button type="button" class="result-action-button primary" id="result-rematch-button">重新戰鬥</button>
+      </div>
+      <p class="result-choice-hint" id="result-choice-hint">等待雙方選擇…</p>
+    </div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/firebase-rtdb.js"></script>
+  <script src="js/storage.js"></script>
+  <script src="js/character-data.js"></script>
+  <script src="js/battle.js"></script>
+</body>
+</html>

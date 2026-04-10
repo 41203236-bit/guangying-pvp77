@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光影對決｜輸入玩家名稱</title>
+  <link rel="stylesheet" href="css/name.css">
+</head>
+<body>
+  <main class="page-shell">
+    <section class="hero-panel" aria-label="遊戲標題區">
+      <div class="hero-badge">LIGHT × SHADOW</div>
+      <h1 class="game-title">光影對決</h1>
+      <p class="hero-subtitle">輸入你的名字，準備進入光影對決。</p>
+    </section>
+
+    <section class="form-panel" aria-labelledby="name-form-title">
+      <div class="panel-card">
+        <h2 id="name-form-title">輸入玩家名稱</h2>
+        <p class="panel-description">請先設定玩家名稱。</p>
+
+        <form id="name-form" novalidate>
+          <label class="input-label" for="player-name">玩家名字</label>
+
+          <div class="input-wrap">
+            <input
+              id="player-name"
+              name="playerName"
+              type="text"
+              maxlength="12"
+              autocomplete="off"
+              placeholder="請輸入名字"
+              aria-describedby="name-rule name-error"
+            >
+            <span id="name-count" class="char-count">0/12</span>
+          </div>
+
+          <p id="name-rule" class="input-rule">允許：中文、英文、數字、底線（_）、減號（-）</p>
+          <p id="name-error" class="error-message" role="alert" aria-live="polite"></p>
+
+          <div class="name-preview" id="name-preview">目前顯示名稱：未設定</div>
+
+          <div class="button-row">
+            <button type="submit" class="primary-button">點擊開始</button>
+            <button type="button" id="clear-name" class="secondary-button">清除</button>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/storage.js"></script>
+  <script src="js/name.js"></script>
+</body>
+</html>

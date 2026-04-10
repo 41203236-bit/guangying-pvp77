@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>光影對決｜選擇角色</title>
+  <link rel="stylesheet" href="css/character.css">
+</head>
+<body>
+  <div class="space-noise" aria-hidden="true"></div>
+  <main class="character-page-shell">
+    <header class="character-topbar">
+      <div class="player-panel">
+        <div class="player-tag" id="player-name-tag">玩家名字：讀取中...</div>
+        <button type="button" class="change-camp-button" id="change-camp-button">更改陣營</button>
+      </div>
+
+      <div class="selection-summary">
+        <div class="selection-summary-inner">
+          <p id="selected-camp-text">目前陣營：尚未選擇</p>
+          <p id="selected-character-text">目前角色：尚未選擇</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="board-section" aria-label="角色選擇區">
+      <div class="pick-hint" id="pick-hint" role="status">請選擇你的角色</div>
+      <section class="card-board" id="character-cards"></section>
+    </section>
+
+    <div class="page-actions">
+      <button type="button" class="complete-button" id="complete-selection" disabled>完成</button>
+    </div>
+  </main>
+
+  <div class="camp-modal is-hidden" id="camp-modal" aria-hidden="true">
+    <div class="camp-modal-backdrop"></div>
+    <section class="camp-modal-card" role="dialog" aria-modal="true" aria-labelledby="camp-title">
+      <p class="camp-eyebrow">CAMP SELECT</p>
+      <h2 id="camp-title">請選擇你的陣營</h2>
+      <p class="camp-note">先決定陣營，再選擇角色。光系會以金色高亮，暗系會以紫黑能量高亮。</p>
+      <div class="camp-option-row">
+        <button type="button" class="camp-option light" id="choose-light">
+          <span class="camp-name">光之陣營</span>
+          <span class="camp-desc">明亮、金色、清楚好辨識</span>
+        </button>
+        <button type="button" class="camp-option dark" id="choose-dark">
+          <span class="camp-name">暗之陣營</span>
+          <span class="camp-desc">深紫、冷冽、偏壓迫感</span>
+        </button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast-message" hidden></div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/character-data.js"></script>
+  <script src="js/character.js"></script>
+</body>
+</html>
